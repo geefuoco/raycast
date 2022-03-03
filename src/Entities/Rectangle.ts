@@ -47,9 +47,4 @@ export default class Rectangle extends MovableShape {
       this.length
     );
   }
-
-  update(): void {
-    this.position = this.position.add(this.velocity);
-    this.draw();
-  }
 }

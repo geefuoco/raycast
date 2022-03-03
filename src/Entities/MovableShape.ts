@@ -22,5 +22,9 @@ export default abstract class MovableShape extends Shape implements Movable {
   }
 
   abstract draw(): void;
-  abstract update(): void;
+
+  update(): void {
+    this.position = this.position.add(this.velocity);
+    this.draw();
+  }
 }
