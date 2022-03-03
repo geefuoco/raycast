@@ -1,0 +1,35 @@
+{
+  "name": "raycast",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --watch",
+    "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
+    "lint": "eslint src --ext .ts --fix",
+    "get-types": "typesync && npm i",
+    "build": "webpack --watch",
+    "dev": "concurrently 'npm run build' 'webpack serve --live-reload'"
+  },
+  "keywords": [],
+  "author": "Gianluca Fuoco",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/eslint": "^8.4.1",
+    "@types/prettier": "^2.4.4",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "concurrently": "^7.0.0",
+    "eslint": "^8.10.0",
+    "html-webpack-plugin": "^5.5.0",
+    "html-webpack-tags-plugin": "^3.0.2",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "ts-loader": "^9.2.7",
+    "typescript": "^4.6.2",
+    "typesync": "^0.8.0",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
