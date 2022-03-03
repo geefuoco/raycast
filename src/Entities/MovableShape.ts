@@ -13,6 +13,14 @@ export default abstract class MovableShape extends Shape implements Movable {
     this.velocity = velocity;
   }
 
+  getVelocity(): Vector2D {
+    return this.velocity;
+  }
+
+  setVelocity(velocity: Vector2D): void {
+    this.velocity = velocity;
+  }
+
   abstract draw(): void;
   abstract update(): void;
 }

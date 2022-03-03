@@ -24,4 +24,20 @@ export default class Shape {
     this.color = color;
     this.context = context;
   }
+
+  getPosition(): Vector2D {
+    return this.position;
+  }
+
+  getColor(): string {
+    return this.color;
+  }
+
+  setPosition(position: Vector2D): void {
+    this.position = position;
+  }
+
+  setColor(color: string): void {
+    this.color = color;
+  }
 }

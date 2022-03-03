@@ -22,6 +22,22 @@ export default class Rectangle extends MovableShape {
     this.length = length;
   }
 
+  getLength(): number {
+    return this.length;
+  }
+
+  getWidth(): number {
+    return this.width;
+  }
+
+  setLength(length: number) {
+    this.length = length;
+  }
+
+  setWidth(width: number) {
+    this.width = width;
+  }
+
   draw(): void {
     this.context.fillStyle = this.color;
     this.context.fillRect(
