@@ -25,6 +25,30 @@ export default class Line {
     this.color = color;
   }
 
+  setStart(vector: Vector2D): void {
+    this.start = vector;
+  }
+
+  setEnd(vector: Vector2D): void {
+    this.end = vector;
+  }
+
+  setColor(color: string): void {
+    this.color = color;
+  }
+
+  getColor(): string {
+    return this.color;
+  }
+
+  getStart(): Vector2D {
+    return this.start;
+  }
+
+  getEnd(): Vector2D {
+    return this.end;
+  }
+
   draw(): void {
     this.context.strokeStyle = this.color;
     this.context.beginPath();
