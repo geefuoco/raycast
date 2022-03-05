@@ -37,9 +37,9 @@ export default class Vector2D {
 
   normalize(): Vector2D {
     const magnitude = this.magnitude();
-    const x = this.x / magnitude;
-    const y = this.y / magnitude;
-    return new Vector2D(x, y);
+    this.x = this.x / magnitude;
+    this.y = this.y / magnitude;
+    return this;
   }
 
   dot(vec: Vector2D): number {
