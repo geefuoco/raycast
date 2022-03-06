@@ -11,6 +11,10 @@ export default class Player extends Circle {
     this.setRays();
   }
 
+  draw(): void {
+    this.rays.forEach((ray) => ray.draw());
+  }
+
   getRays(): Ray[] {
     return this.rays;
   }
@@ -20,47 +24,42 @@ export default class Player extends Circle {
     this.rays.forEach((ray) => ray.setPosition(vector));
   }
 
-  // draw(): void {
-  //   super.draw();
-  //   this.rays.forEach((ray) => ray.draw());
-  // }
-
   castTo(lines: Line[]) {
     this.rays.forEach((ray) => {
-      let min = Infinity;
+      let record = Infinity;
       let closest: Vector2D = null!;
       lines.forEach((line) => {
         const intersection = ray.cast(line);
         if (intersection) {
-          const distance = Math.sqrt(
-            (intersection.getX() - ray.getPosition().getX()) ** 2 +
-              (intersection.getY() - ray.getPosition().getY()) ** 2
-          );
-          if (distance < min) {
-            min = distance;
+          const diffX = intersection.getX() - this.getPosition().getX();
+          const diffY = intersection.getY() - this.getPosition().getY();
+          const distance = Math.hypot(diffX, diffY);
+          if (distance < record) {
+            record = distance;
             closest = intersection;
-          }
-          if (closest) {
-            const l = new Line({
-              context: this.context,
-              color: "white",
-              start: this.getPosition(),
-              end: closest
-            });
-            l.draw();
           }
         }
       });
+      if (closest) {
+        const l = new Line({
+          context: this.context,
+          color: "green",
+          start: ray.getPosition(),
+          end: closest
+        });
+        l.draw();
+      }
     });
   }
 
   private setRays() {
     for (let i = 0; i < 360; i += 10) {
+      const rad = i * (Math.PI / 180);
       this.rays.push(
         new Ray({
           context: this.context,
-          position: this.getPosition(),
-          direction: new Vector2D(Math.cos(i), Math.sin(i))
+          position: this.position,
+          direction: new Vector2D(Math.cos(rad), Math.sin(rad))
         })
       );
     }

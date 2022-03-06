@@ -1,8 +1,5 @@
-import Circle from "./Entities/Circle";
-import MovableShape from "./Entities/MovableShape";
 import Vector2D from "./Util/Vector2D";
 import Line from "./Entities/Line";
-import Ray from "./Entities/Ray";
 import Player from "./Entities/Player";
 (() => {
   const canvas: HTMLCanvasElement | null = document.querySelector("#canvas");
@@ -23,7 +20,7 @@ import Player from "./Entities/Player";
   let isRunning: boolean;
   let player: Player;
   const lines: Line[] = [];
-  const numberOfLines = 7;
+  const numberOfLines = 9;
 
   const getVectorWithinBounds = (): Vector2D => {
     const maxX = canvas.width;
@@ -50,7 +47,6 @@ import Player from "./Entities/Player";
       velocity: new Vector2D(0, 0),
       radius: 5
     });
-    //render a line / make a raycast class
 
     for (let i = 0; i < numberOfLines; i++) {
       lines.push(
@@ -107,14 +103,6 @@ import Player from "./Entities/Player";
     }
   };
 
-  // const updateRay = (ev: MouseEvent) => {
-  //   if (ray) {
-  //     const newVec = new Vector2D(ev.clientX + offsetX, ev.clientY + offsetY);
-  //     ray.setDirection(newVec);
-  //   }
-  // };
-
-  // window.addEventListener("mousemove", updateRay);
   window.addEventListener("mousemove", updatePlayer);
   window.addEventListener("keydown", togglePause);
 
