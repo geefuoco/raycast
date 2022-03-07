@@ -1,6 +1,7 @@
 import Vector2D from "./Util/Vector2D";
 import Line from "./Entities/Line";
 import Player from "./Entities/Player";
+import Circle from "./Entities/Circle";
 (() => {
   const canvas: HTMLCanvasElement | null = document.querySelector("#canvas");
   if (!canvas) return;
@@ -18,6 +19,9 @@ import Player from "./Entities/Player";
 
   let animationId: number;
   let isRunning: boolean;
+  let drawMode = false;
+  let drawModeCircle: Circle | null;
+  let newLine: Line | null = null;
   let player: Player;
   const lines: Line[] = [];
   const numberOfLines = 6;
@@ -74,6 +78,9 @@ import Player from "./Entities/Player";
       player.update();
       player.castTo(lines);
     }
+    if (drawModeCircle) {
+      drawModeCircle.draw();
+    }
 
     animationId = requestAnimationFrame(loop);
   };
@@ -91,6 +98,19 @@ import Player from "./Entities/Player";
         cancel();
       } else {
         requestAnimationFrame(loop);
+        drawMode = false;
+      }
+    }
+  };
+
+  const toggleDraw = (ev: KeyboardEvent) => {
+    if (ev.key === "D" || ev.key === "d") {
+      drawMode = !drawMode;
+      if (drawMode) {
+        window.removeEventListener("mousemove", updatePlayer);
+      } else {
+        drawModeCircle = null;
+        window.addEventListener("mousemove", updatePlayer);
       }
     }
   };
@@ -103,8 +123,34 @@ import Player from "./Entities/Player";
     }
   };
 
+  const drawLine = (ev: MouseEvent) => {
+    console.log(ev.button);
+    if (!drawMode) return;
+    drawModeCircle = new Circle({
+      context,
+      color: "red",
+      position: new Vector2D(ev.clientX + offsetX, ev.clientY + offsetY),
+      radius: 5,
+      velocity: new Vector2D(0, 0)
+    });
+    if (newLine) {
+      newLine.setEnd(new Vector2D(ev.clientX + offsetX, ev.clientY + offsetY));
+      lines.push(newLine);
+      newLine = null;
+    } else {
+      newLine = new Line({
+        context,
+        color: "white",
+        start: new Vector2D(ev.clientX + offsetX, ev.clientY + offsetY),
+        end: new Vector2D(ev.clientX + offsetX, ev.clientY + offsetY)
+      });
+    }
+  };
+
+  window.addEventListener("mousedown", drawLine);
   window.addEventListener("mousemove", updatePlayer);
   window.addEventListener("keydown", togglePause);
+  window.addEventListener("keydown", toggleDraw);
 
   requestAnimationFrame(loop);
 })();
