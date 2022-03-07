@@ -55,7 +55,7 @@ export default class Player extends Circle {
   }
 
   private setRays() {
-    for (let i = 0; i < 360; i += 10) {
+    for (let i = 0; i < 360; i += 1) {
       const rad = i * (Math.PI / 180);
       this.rays.push(
         new Ray({
