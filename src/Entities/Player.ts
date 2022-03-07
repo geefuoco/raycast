@@ -12,7 +12,9 @@ export default class Player extends Circle {
   }
 
   draw(): void {
-    this.rays.forEach((ray) => ray.draw());
+    this.rays.forEach((ray) => {
+      ray.draw();
+    });
   }
 
   getRays(): Ray[] {
@@ -31,8 +33,8 @@ export default class Player extends Circle {
       lines.forEach((line) => {
         const intersection = ray.cast(line);
         if (intersection) {
-          const diffX = intersection.getX() - this.getPosition().getX();
-          const diffY = intersection.getY() - this.getPosition().getY();
+          const diffX = intersection.getX() - ray.getPosition().getX();
+          const diffY = intersection.getY() - ray.getPosition().getY();
           const distance = Math.hypot(diffX, diffY);
           if (distance < record) {
             record = distance;

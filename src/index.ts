@@ -20,7 +20,7 @@ import Player from "./Entities/Player";
   let isRunning: boolean;
   let player: Player;
   const lines: Line[] = [];
-  const numberOfLines = 9;
+  const numberOfLines = 6;
 
   const getVectorWithinBounds = (): Vector2D => {
     const maxX = canvas.width;
